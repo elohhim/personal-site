@@ -1,20 +1,82 @@
 ---
 slug: welcome
-title: Welcome To Next.js and Netlify Blog Template
-date: 2020-06-10
-author: wutali
+title: Welcome
+date: 2020-12-29
+author: jkumor
 tags:
-  - document
+  - personal
+  - webdev
+  - nextjs
 ---
 
-## The standard Lorem Ipsum passage
+## Why it was made?
 
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+I was never good at writing nor I wanted to do so. So why even bother with
+personal website (for some reason I like that term better than blog)?
+Well... because I can.
 
-## written by Cicero in 45 BC
+Maybe having a place like this will motivate me to work on some of my
+side-projects (I will need something to write about, right?). Or maybe it will die like
+most of those projects ;) Time will show.
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+## How it was made?
 
-## 1914 translation by H. Rackham
+I've read somewhere that it is a tradition to start a blog with a post
+about building the site itself. Not sure if it is a real thing, it was some
+random programmer's site (just like this one) and I never bothered to verify that.
+Anyway, that will give me some volume for this first entry (though not much
 
-"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+- things are pretty simple nowadays).
+
+This page is git based and built with [Netlify](https://www.netlify.com/)
+(lookup Jamstack if you are interested in more details).
+It uses [nextjs-netlify-blog-template](https://github.com/wutali/nextjs-netlify-blog-template).
+
+The process is as straightforward as possible:
+
+1. Go to [nextjs-netlify-blog-template](https://github.com/wutali/nextjs-netlify-blog-template).
+1. Click a "Deploy to Netlify" button (or follow this link directly to Netlify:
+   [Deploy](https://app.netlify.com/start/deploy?repository=https://github.com/wutali/nextjs-netlify-blog-template&stack=cms)).
+1. Connect Netlify to GitHub.
+1. Provide repository name for the site and click "Save & Deploy" (template
+   already configures Identity and Git Gateway services so they will be installed
+   automatically).
+1. Set up a domain (in my DNS provider configuration I added a `CNAME` record
+   with `site` subdomain host and pointed it to my Netlify subdomain).
+1. Do some cleanup of a template (remove default posts and tags).
+
+And that is it.
+
+Writing this paragraph took many times longer than it took to go through those
+steps.
+
+## Why it was made like that?
+
+Despite working as a developer for quite some time already I had no previous
+experience of creating a website all by myself. So my choices might be a little
+random and whimsy. Things that led me to this decision (in random order):
+
+- I think that server-side generated static site is a good fit for a personal
+  site.
+- I like Jamstack idea of git driven CMS (no backend API needed).
+- As I work professionally with [Angular](https://angular.io/) lately, I
+  decided that [React](https://reactjs.org/) based solution will be nice.
+- I read some articles and watched some videos about
+  [Next.js](https://nextjs.org/) and wanted to try it out.
+- [Netlify](https://www.netlify.com/) was my first search result in Google and
+  it has a free tier which should fit my needs for now.
+- Medium seems like a go-to platform for blogging (or maybe it is not anymore)
+  but I wanted a personal site not an account on yet another social... medium.
+  Also, I might be adding something more than just blog posts (some online
+  utils, apps), and it is nice to have such possibility out of the box.
+
+I am not saying this is a perfect solution. Heck it is probably far from optimal
+or state of art. At some point I might change it to something else
+(self/cloud-hosted?).
+
+But in the end
+[the point is not to catch a bunny, but to chase him, but to chase him, but to chase him](https://youtu.be/k2WtBpMkxz8).
+
+Enjoy!
+
+Jan
