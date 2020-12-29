@@ -1,35 +1,75 @@
 import React from "react";
 import Twitter from "../assets/twitter-alt.svg";
 import GitHub from "../assets/github-alt.svg";
+import Linkedin from "../assets/linkedin-alt.svg";
 import config from "../lib/config";
 
-export function SocialList({}) {
+type SvgComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+
+interface SocialMedium {
+  name: string;
+  href: string;
+  component: SvgComponent;
+  account: string;
+};
+
+const socialMedia: SocialMedium[] = [
+  {
+    name: 'GitHub',
+    href: `https://github.com/${config.github_account}`,
+    component: GitHub,
+    account: config.github_account,
+  },
+  {
+    name: 'Twitter',
+    href: `https://twitter.com/${config.twitter_account}`,
+    component: Twitter,
+    account: config.twitter_account,
+  },
+  {
+    name: 'Linkedin',
+    href: `https://linkedin.com/in/${config.linkedin_account}`,
+    component: Linkedin,
+    account: config.linkedin_account
+  }
+];
+
+interface SocialLinkProps {
+  name: string;
+  href: string;
+  component: SvgComponent
+}
+
+function SocialLink({ name, href, component }: SocialLinkProps) {
+  const Component = component;
+  return (
+    <a
+      title={name}
+      href={href}
+      target="_blank"
+      rel="noopener"
+    >
+      <Component width={24} height={24} fill={"#222"} />
+      <style jsx>{`
+      a {
+        display: inline-block;
+      }
+      a:not(:last-child) {
+        margin-right: 2em;
+      }`}
+      </style>
+    </a>
+
+  );
+}
+
+export function SocialList({ }) {
   return (
     <div>
-      <a
-        title="Twitter"
-        href={`https://twitter.com/${config.twitter_account}`}
-        target="_blank"
-        rel="noopener"
-      >
-        <Twitter width={24} height={24} fill={"#222"} />
-      </a>
-      <a
-        title="GitHub"
-        href={`https://github.com/${config.github_account}`}
-        target="_blank"
-        rel="noopener"
-      >
-        <GitHub width={24} height={24} fill={"#222"} />
-      </a>
-      <style jsx>{`
-        a {
-          display: inline-block;
-        }
-        a:not(:last-child) {
-          margin-right: 2em;
-        }
-      `}</style>
+      { socialMedia
+        .filter(medium => medium.account)
+        .map(medium => <SocialLink key={medium.name} {...medium} />)
+      }
     </div>
   );
 }
