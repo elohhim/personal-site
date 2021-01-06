@@ -9,10 +9,12 @@ import BasicMeta from "../components/meta/BasicMeta";
 import JsonLdMeta from "../components/meta/JsonLdMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
+import ReadTime from "../components/ReadTime";
 import { SocialList } from "../components/SocialList";
 import TagButton from "../components/TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
+import theme from "../styles/theme";
 
 type Props = {
   title: string;
@@ -70,6 +72,9 @@ export default function Index({
                 <div>
                   <Author author={getAuthor(author)} />
                 </div>
+                <div>
+                  <ReadTime minutes={3} />
+                </div>
               </div>
             </header>
             <div className={styles.content}>{content}</div>
@@ -100,6 +105,11 @@ export default function Index({
             }
             .metadata div {
               display: inline-block;
+              margin-right: 0.5rem;
+            }
+            .metadata div:not(:first-child)::before {
+              content: "·";
+              text: ${theme.text.light};
               margin-right: 0.5rem;
             }
             article {
