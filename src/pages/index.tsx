@@ -13,10 +13,10 @@ export default function Index() {
       <div className="container">
         <div>
           <h1>
-            Hi, This is personal site of a random programmer<span className="fancy">.</span>
+            Personal site of a random programmer<span className="fancy">.</span>
           </h1>
-          <span className="handle">@jankumor-site</span>
-          <h2>Place where I post random stuff.</h2>
+          <span className="handle">@site-jankumor</span>
+          <h2>Hi, I am Jan and this is place where I post random stuff<span className="fancy">.</span></h2>
           <SocialList />
         </div>
       </div>
