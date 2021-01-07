@@ -5,3 +5,5 @@ tags:
     name: webdev
   - slug: nextjs
     name: nextjs
+  - slug: machine-learning
+    name: machine-learning
