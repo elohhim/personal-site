@@ -34,7 +34,6 @@ export default function BasicMeta({
       />
       {author ? <meta name="author" content={author} /> : null}
       <link rel="canonical" href={config.base_url + url} />
-      <script src="https://hypothes.is/embed.js" async></script>
     </Head>
   );
 }

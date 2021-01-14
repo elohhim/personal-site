@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React from "react";
 import styles from "../../public/styles/content.module.css";
 import Author from "../components/Author";
@@ -6,6 +5,7 @@ import Copyright from "../components/Copyright";
 import Date from "../components/Date";
 import Layout from "../components/Layout";
 import BasicMeta from "../components/meta/BasicMeta";
+import HypothesisMeta from "../components/meta/HypothesisMeta";
 import JsonLdMeta from "../components/meta/JsonLdMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
@@ -24,6 +24,7 @@ type Props = {
   tags: string[];
   author: string;
 };
+
 export default function Index({
   title,
   date,
@@ -61,6 +62,7 @@ export default function Index({
           author={authorName}
           description={description}
         />
+        <HypothesisMeta />
         <div className={"container"}>
           <article>
             <header>
