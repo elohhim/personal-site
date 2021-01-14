@@ -11,7 +11,7 @@ interface SocialMedium {
   href: string;
   component: SvgComponent;
   account: string;
-};
+}
 
 const socialMedia: SocialMedium[] = [
   {
@@ -47,7 +47,7 @@ function SocialLink({ name, href, component }: SocialLinkProps) {
       title={name}
       href={href}
       target="_blank"
-      rel="noopener"
+      rel="noreferrer"
     >
       <Component width={24} height={24} fill={"#222"} />
       <style jsx>{`

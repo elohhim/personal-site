@@ -1,0 +1,3 @@
+# Ignore jsx/tsx as prettier is not allowing one attribute per line
+*.jsx
+*.tsx
