@@ -1,3 +1,9 @@
 [build]
   publish = "dist"
   command = "npm run export"
+
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
