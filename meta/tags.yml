@@ -7,3 +7,5 @@ tags:
     name: nextjs
   - slug: machine-learning
     name: machine-learning
+  - slug: nlp
+    name: nlp
