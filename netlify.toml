@@ -4,6 +4,11 @@
 
 [[plugins]]
   package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    exclude = [
+      './dist/404.html',
+      './dist/google2a7e338f636d2031.html'
+    ]
 
 [[plugins]]
   package = "netlify-plugin-cache-nextjs"
