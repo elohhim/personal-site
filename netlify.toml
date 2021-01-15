@@ -7,7 +7,8 @@
   [plugins.inputs]
     exclude = [
       './dist/404.html',
-      './dist/google2a7e338f636d2031.html'
+      './dist/google2a7e338f636d2031.html',
+      './dist/admin/index.html',
     ]
 
 [[plugins]]
