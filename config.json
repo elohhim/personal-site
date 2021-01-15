@@ -1,16 +1,19 @@
 {
   "base_url": "https://site.jankumor.pl",
-  "site_title": "Jan Kumor's Site",
-  "site_description": "Jan Kumor Persolnal Site",
+  "site_title": "Jan Kumor's Personal Site",
+  "site_description": "Jan Kumor's Persolnal Site - place where I post random (programming or not) stuff",
   "site_keywords": [
     {
       "keyword": "Programming"
     },
     {
       "keyword": "Personal"
-    }
+    },
+    "Blog",
+    "IT"
   ],
   "posts_per_page": 10,
   "github_account": "elohhim",
-  "linkedin_account": "jkumor"
+  "linkedin_account": "jkumor",
+  "twitter_account": " "
 }
