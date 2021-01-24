@@ -1,0 +1,34 @@
+---
+slug: hypothesis-setup
+title: Screwing up hypothes.is client setup
+date: 2021-01-23
+author: jkumor
+tags:
+  - webdev
+  - nextjs
+  - nextjs
+---
+In my previous post I've proudly announced that I've:
+
+> Added [hypothes.is](https://web.hypothes.is/) sidebar to the site.
+
+Well, while technically it was true, practically I screwed it badly.
+
+## What is Hypothesis?
+
+**TL;DR:** this sidebar on the right side of page, somewhere there >>>
+
+Upfront let me give quick intro to what Hypothesis is. Hypothesis is an organization which is focused on delivering open conversation layer for digital documents based on web annotation standard by [W3C Web Annotation Working Group](https://www.w3.org/annotation/).
+
+As part of their effort they work on [hypothes.is](https://web.hypothes.is/) - open source (mainly 2 clause BSD) platform for web annotations. The main parts of ecosystem are:
+- *h* - web service for annotations, it is backing whole ecosystem APIs.
+- *client* - web-based client for consuming and creating annotations. It can be used in a form of a browser extension or it can be directly embedded into web page by the author.
+- integrations with different Learning Management Systems (big focus here actually) and Content Management Systems.
+
+But what is actual benefit of using Hypothesis? I will cite their website here:
+
+> Using annotation, we enable sentence-level note taking or critique on top of classroom reading, news, blogs, scientific articles, books, terms of service, ballot initiatives, legislation and more.
+
+Seems great to me! 
+
+Assuming that the client is still there by the time you are reading this, you can try it right now. Just select any part of text and you should see little tooltip with annotate and highlight options. 
