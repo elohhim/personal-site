@@ -1,0 +1,127 @@
+---
+slug: hypothesis-setup
+title: Screwing up Hypothesis client setup
+date: 2021-01-23
+author: jkumor
+tags:
+  - webdev
+  - nextjs
+---
+
+In my previous post, I've proudly announced that:
+
+> [I have] Added [hypothes.is](https://web.hypothes.is/) sidebar to the site.
+
+Well, while technically it was true, practically I screwed it badly. To the point where it was not really usable.
+
+## What is Hypothesis?
+
+**TL;DR:** This sidebar on the right side of the page, hopefully somewhere there >>>
+
+Upfront let me give a quick intro to what Hypothesis is. Hypothesis is an organization focused on delivering an open conversation layer for digital documents based on web annotation standard by [W3C Web Annotation Working Group](https://www.w3.org/annotation/).
+
+As part of their effort, they work on [hypothes.is](https://web.hypothes.is/), which is an open-source (mainly 2 clause BSD) platform for web annotations. The main parts of the ecosystem are:
+
+- _h_ - web service for annotations, it is backing whole ecosystem APIs.
+- _client_ - web-based client for consuming and creating annotations. It can be used in a form of a browser extension or it can be directly embedded into a webpage by the author.
+- integrations with different Learning Management Systems (big focus here) and Content Management Systems.
+
+![Hypothesis client usage example on this page](/images/hypothesis-setup-client-example.png)
+_Hypothesis client usage example on this page_
+
+But what is the actual benefit of using Hypothesis? Let me cite their website:
+
+> Using annotation, we enable sentence-level note taking or critique on top of classroom reading, news, blogs, scientific articles, books, terms of service, ballot initiatives, legislation and more.
+
+Sounds great to me! Reviewing, commenting, taking notes on things with the capability of preserving precise context, seems like a proper way of doing online discourse.
+
+Assuming that the client is still embedded by the time you are reading this, you can give it a try just now. Select any part of the text and you should see the annotator tooltip with "annotate" and "highlight" options.
+
+![Hypothesis client Annotator tooltip](/images/hypothesis-setup-annotator-example.png)
+_Hypothesis client Annotator tooltip_
+
+## What went wrong?
+
+In theory embedding Hypothesis client is dead simple:
+
+> To add Hypothesis to your web site, simply add the following line to the HTML source of your page:
+>
+> `<script src="https://hypothes.is/embed.?js" async></script>`
+
+So I did. But my site is Next.js based, so instead of HTML source I've edited my `BasicMeta.tsx` component:
+
+```tsx
+export default function BasicMeta([...]: Props) {
+  return (
+    <Head>
+      [...]
+      <script src="https://hypothes.is/embed.js" async></script>
+    </Head>
+  );
+```
+
+And boy, did I screw up badly! At first glance everything was fine, the client sidebar was displayed where it should be, and it was possible to annotate my webpage (I even tested it, created one annotation and checked if it was visible in Hypothesis API - it was). However, a few days later I have found that there is this little, little problem. Annotations were not persisted under correct URLs. For example I was able to see annotations I've made on my first post right on the welcome page. On the other hand, they were not present if I navigated directly to that post. How does that happen? Well, two things needs to be considered to answer that question.
+
+The first one, is how my site is built. You see, _Next.js_ apps are kinda hybrid, the site is server-side generated for fast load time, but for the same reason, sub-sequential routing events can be handled on the client-side, with fetching only necessary data from the server as a `json`. Thanks to browser history API page address changes, data is rendered by React in a hydration process, but the page never reloads.
+
+And this is where we are getting to the second factor: how Hypothesis client works. One of the core principles of web annotations is that they are meant for digital documents, and on the web those are identified by URLs. When the script is loaded, it retrieves the current page address, so it knows what annotations it should fetch and create. However, due to some technical complexity of tracking content changes, the client lacks proper support for SPAs and client-side routing. So it never knew that document changed when I navigated to the blog post from the welcome page. That is why annotations were persisted with wrong metadata and associated with a wrong URL.
+
+## How to unscrew this?
+
+Unfortunately, the Hypothesis client lacks APIs for interacting with it from a webpage level. This is not a bad thing per se, it probably helps to keep it simple and easier to maintain. So this is a design choice which needed to be overcome somehow.
+
+The obvious solution is of course to unload the client manually and load it again when client-side routing happens. This approach has some drawbacks, the biggest one being probably that a lot of code and logic related to the client is unnecessary executed multiple times. Fortunately, I was not the first person to try that, and there were some bits of knowledge (to be humble it is not very popular technology) that I was able to find on the web. In the discussion under this [issue](https://github.com/hypothesis/product-backlog/issues/1135), [Matthew King](https://github.com/matt-e-king) points to this, slightly obsolete, [gist](https://gist.github.com/robertknight/b71af79a7dbe25712fad192e44bc6f5f), where [Robert Knight](https://github.com/robertknight) (one of the Hypothesis core developers) describes this approach as currently recommended one. There is also a comment by Robert to use code analogic to [this](https://github.com/hypothesis/browser-extension/blob/8c1548dda1c840016c0bbc876e051b6b1f4d810e/src/unload-client.js) to unload the client (which is why I called the gist slightly obsolete in the first place).
+
+At this point the only missing part is how to tell when the client should be unloaded. This is where _Next.js_ [router](https://nextjs.org/docs/api-reference/next/router) kicks in. To get access to the router we can use the `useRouter()` _React_ hook. It exposes several events related to navigation on which it is possible to subscribe and perform custom logic.
+
+Putting together everything mentioned above, I was able to implement this custom hook which I am calling in my `App` component:
+
+```ts
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+/*
+  React hook for unloading Hypothes.is client sidebar on Next.js router
+  change. Allows loading client again with proper url if needed.
+
+  Based on: https://github.com/hypothesis/browser-extension/blob/master/src/unload-client.js
+*/
+const useUnloadHypothesis = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const annotatorSelector = 'link[type="application/annotator+html"]';
+      const annotatorLink = document.querySelector(annotatorSelector);
+      if (annotatorLink) {
+        annotatorLink.dispatchEvent(new Event("destroy"));
+      }
+    };
+    router.events.on("routeChangeStart", handleRouteChange);
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
+};
+
+export default useUnloadHypothesis;
+```
+
+I have also decided that I want to embed Hypothesis only into posts pages. That is why I've created the new meta component which I include only in my post layout:
+
+```ts
+import Head from "next/head";
+
+export default function HypothesisMeta() {
+  return (
+    <Head>
+      <script src="https://hypothes.is/embed.js" async></script>
+    </Head>
+  );
+}
+```
+
+So far it seems to be working just fine. Of course, it would be better if the client could handle history API changes by itself, but in the end, working around its limitations was not that hard.
+
+PS. Try Hypothesis yourself!
