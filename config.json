@@ -1,7 +1,7 @@
 {
   "base_url": "https://site.jankumor.pl",
-  "site_title": "Jan Kumor's Personal Site",
-  "site_description": "Jan Kumor's Personal Site - place where I post random (programming or not) stuff",
+  "site_title": "Jan Kumor's Site",
+  "site_description": "Jan Kumor's Site - place where I post random (programming or not) stuff",
   "site_keywords": [
     {
       "keyword": "Programming"
@@ -9,8 +9,15 @@
     {
       "keyword": "Personal"
     },
-    "Blog",
-    "IT"
+    {
+      "keyword": "Blog"
+    },
+    {
+      "keyword": "Web Development"
+    },
+    {
+      "keyword": "Machine Learning"
+    }
   ],
   "posts_per_page": 10,
   "github_account": "elohhim",

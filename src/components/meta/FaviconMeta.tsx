@@ -9,6 +9,8 @@ export default function FaviconMeta() {
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
       <link rel="shortcut icon" href="/favicon.ico" />
+      <meta name="apple-mobile-web-app-title" content="Jan Kumor's Site" />
+      <meta name="application-name" content="Jan Kumor's Site" />
       <meta name="msapplication-TileColor" content="#00aba9" />
       <meta name="theme-color" content="#ffffff" />
     </Head>
