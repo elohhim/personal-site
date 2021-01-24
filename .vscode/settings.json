@@ -1,4 +1,13 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "grammarly.userWords": [
+    "digestable",
+    "jkumor",
+    "json",
+    "tsx",
+    "url",
+    "useRouter",
+    "webdev"
+  ]
 }

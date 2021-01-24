@@ -10,11 +10,12 @@ tags:
   - nextjs
   - nlp
 ---
+
 ## TL;DR
 
 Before publishing this post: Nothing at all.
 
-After publishing this post: There is an article mentioning *DALL-E* on this site.
+After publishing this post: There is an article mentioning _DALL-E_ on this site.
 
 ## Hacker News - the root of all evil
 
@@ -28,7 +29,7 @@ somehow I ended up there again last night (I was venting out some frustration
 about Medium ~~comments~~ responses system in google search and one of the top
 hits was HN).
 
-And there it was - someone posted a link to *Open AI*'s
+And there it was - someone posted a link to _Open AI_'s
 [DALL-E](https://openai.com/blog/dall-e/). And I was lost.
 
 ## DALL-E
@@ -45,14 +46,14 @@ My knowledge of generative networks never reached beyond simple GANNs and style
 transfer (which is still better than my grasp on NLP). However, the article is
 only 27 minutes read and not very detailed on a technical level, so it is
 digestable for me. The most important thing though, are the examples of what
-*DALL-E* is capable of. It can generate:
+_DALL-E_ is capable of. It can generate:
 
 > an illustration of a baby capybara in a wizard hat playing a guitar
 
 and the results are great:
 
-![Sample Image](/images/dall-e-capybara-example.png)
-*Examples of DALL-E output for prompt shown above, all credit goes to Open AI*
+![DALL-E capybara example](/images/dall-e-capybara-example.png)
+_Examples of DALL-E output for prompt shown above, all credit goes to Open AI_
 
 I mean, come on! That is impressive.
 
@@ -67,56 +68,56 @@ There was a vivid discussion on HN
 Some clever points were made there. Some of them might give us, humans, some
 hope for the near future. Here are those which appealed most to me:
 
-* Some concepts probably are much more well-defined (overrepresented) in the
+- Some concepts probably are much more well-defined (overrepresented) in the
   training input set. And there is such possibility that those examples belong
   to those classes. And, same as the model itself, the dataset is huge, so it
   is not a surprise that you can find `anthropomorphized radish` there (search
   for `大根アニメ`, [click](https://www.google.com/search?q=%E5%A4%A7%E6%A0%B9%E3%82%A2%E3%83%8B%E3%83%A1)).
-* It is a language model, so what it learns about is language (translation of
+- It is a language model, so what it learns about is language (translation of
   written language to visual one in this case). It might not be as general as
   it is presented by researchers.
-* The original *GPT-3* model is 175 billion parameters (it is even hard to tell
-  how *Open AI* deploys it for training, heck even interference seems hard).
+- The original _GPT-3_ model is 175 billion parameters (it is even hard to tell
+  how _Open AI_ deploys it for training, heck even interference seems hard).
   I've read some claims that this is enough to encode around a third of the input
-  data directly. With 12 billion parameters, *DALL-E* is slightly thinner, but
+  data directly. With 12 billion parameters, _DALL-E_ is slightly thinner, but
   it is still big enough to be called enormous. So there are some controversies
   about reasoning capabilities of those transformer models. Do they reason or
   simply memorize the data? That would make them, very sophisticated and ML-based
   indeed, but only search algorithms (I know, exaggerating a little bit here ;) ).
-* Black-box problem, which is becoming even more relevant with those models
+- Black-box problem, which is becoming even more relevant with those models
   scaling more and more. We, humans, cannot reason about how the model works.
   We can't predict and explain why it made its decisions. It might work well in
   non-critical usages (creative work) but an unpredictable model is a no-go in
   many areas i.e. medicine or wealth management (sic!).
-* Also, god only knows how processing-intensive training those transformers
+- Also, god only knows how processing-intensive training those transformers
   networks is, some people
   [claim](https://lambdalabs.com/blog/demystifying-gpt-3/) that for original
-  *GPT-3* it would be 355 years and a few million dollars. Better not dive into
+  _GPT-3_ it would be 355 years and a few million dollars. Better not dive into
   this topic, and not convert it to CO<sub>2</sub> tonnes equivalent.
 
-Nevertheless, *DALL-E* is still an IMPRESSIVE and TREMENDOUS work pushing both
+Nevertheless, _DALL-E_ is still an IMPRESSIVE and TREMENDOUS work pushing both
 natural language processing and image generation next step further.
 
-I could probably go on and on, and try to write something about *Open AI's*
-[CLIP](https://openai.com/blog/clip/) which was used in *DALL-E*'s training. Or
-list some highlights about *DALL-E,* so it doesn't seem that I am a bitter man
+I could probably go on and on, and try to write something about _Open AI's_
+[CLIP](https://openai.com/blog/clip/) which was used in _DALL-E_'s training. Or
+list some highlights about _DALL-E,_ so it doesn't seem that I am a bitter man
 who can't admire the significance of this work (once again it is great). But it
 is getting late (1:36 AM) so it would be probably good for me to get some sleep.
 
 ## So, what I am working on?
 
-The whole *DALL-E* thing was supposed to be just a short (kinda ironic) intro
+The whole _DALL-E_ thing was supposed to be just a short (kinda ironic) intro
 from which I would move into site improvements that I am working on currently.
 But again, it is getting late, so I will limit myself to listing them here:
 
-* Added reading time (Medium like) information component to posts. But it is not
+- Added reading time (Medium like) information component to posts. But it is not
   yet populated with the correct value.
-* Addition of some CSS theme mechanism to the template, so I don't need to
+- Addition of some CSS theme mechanism to the template, so I don't need to
   remember what is hex for that gray color used in posts meta info.
-* Added [hypothes.is](https://web.hypothes.is/) sidebar to the site. Found it
+- Added [hypothes.is](https://web.hypothes.is/) sidebar to the site. Found it
   accidentally during my Medium ~~comments~~ responses rage. Seems like a very
   nice concept so I've decided to give it a try.
-* Read a little about SSR (funny how we, as industry, circled back to it) and web performance. Checked
+- Read a little about SSR (funny how we, as industry, circled back to it) and web performance. Checked
   my site performance using
   [Lighthouse](https://developers.google.com/web/tools/lighthouse). Everything
   would be fine, except that adding hypothes.is sidebar gives huge performance
