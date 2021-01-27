@@ -3,18 +3,23 @@ import matter from "gray-matter";
 import path from "path";
 import yaml from "js-yaml";
 
-const postsDirectory = path.join(process.cwd(), "src/pages/posts");
+const postsDirectory = path.join(process.cwd(), "content/posts");
 
 export type PostContent = {
   readonly date: string;
   readonly title: string;
   readonly slug: string;
   readonly tags?: string[];
+  readonly content: string;
 };
 
 let postCache: PostContent[];
 
-function fetchPostContent(): PostContent[] {
+export function fetchPostContentSingle(slug: string): PostContent {
+  return fetchPostContent().find((post) => post.slug === slug);
+}
+
+export function fetchPostContent(): PostContent[] {
   if (postCache) {
     return postCache;
   }
@@ -52,7 +57,10 @@ function fetchPostContent(): PostContent[] {
         );
       }
 
-      return matterData;
+      return {
+        ...matterData,
+        content: matterResult.content,
+      };
     });
   // Sort posts by date
   postCache = allPostsData.sort((a, b) => {
