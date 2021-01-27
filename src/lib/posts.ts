@@ -2,6 +2,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 import yaml from "js-yaml";
+import readingTime from "reading-time";
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -11,6 +12,7 @@ export type PostContent = {
   readonly slug: string;
   readonly tags?: string[];
   readonly content: string;
+  readonly readingTime: number;
 };
 
 let postCache: PostContent[];
@@ -60,6 +62,7 @@ export function fetchPostContent(): PostContent[] {
       return {
         ...matterData,
         content: matterResult.content,
+        readingTime: readingTime(matterResult.content).minutes,
       };
     });
   // Sort posts by date
