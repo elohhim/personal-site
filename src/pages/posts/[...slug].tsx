@@ -19,8 +19,8 @@ import { fetchPostContent, fetchPostContentSingle } from "@/lib/posts";
 import { GetStaticPaths, GetStaticProps } from "next";
 import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
-import { MdxRemote } from "next-mdx-remote/types";
 import rehypePrism from "@mapbox/rehype-prism";
+import { MdxRemote } from "next-mdx-remote/types";
 
 type Props = {
   title: string;
@@ -29,7 +29,7 @@ type Props = {
   description: string;
   tags: string[];
   author: string;
-  renderedOutput: string;
+  source: MdxRemote.Source;
 };
 
 export default function Index({
@@ -39,11 +39,12 @@ export default function Index({
   description,
   tags,
   author,
-  renderedOutput,
+  source,
 }: Props) {
   const keywords = tags.map((it) => getTag(it).name);
   const authorName = getAuthor(author).name;
   const datePublished = new Date(date);
+  const content = hydrate(source);
   return (
     <Layout>
       <BasicMeta
@@ -87,10 +88,7 @@ export default function Index({
               </div>
             </div>
           </header>
-          <div
-            className={styles.content}
-            dangerouslySetInnerHTML={{ __html: renderedOutput }}
-          ></div>
+          <div className={styles.content}>{content}</div>
           <ul className={"tag-list"}>
             {tags.map((it, i) => (
               <li key={i}>
@@ -261,7 +259,7 @@ export default function Index({
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = fetchPostContentSingle(params.slug[0]);
-  const { renderedOutput } = await renderToString(post.content, {
+  const source = await renderToString(post.content, {
     mdxOptions: {
       rehypePlugins: [rehypePrism],
     },
@@ -269,7 +267,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       ...post,
-      renderedOutput,
+      source,
     },
   };
 };
