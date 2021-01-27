@@ -30,6 +30,7 @@ type Props = {
   tags: string[];
   author: string;
   source: MdxRemote.Source;
+  readingTime: number;
 };
 
 export default function Index({
@@ -40,6 +41,7 @@ export default function Index({
   tags,
   author,
   source,
+  readingTime
 }: Props) {
   const keywords = tags.map((it) => getTag(it).name);
   const authorName = getAuthor(author).name;
@@ -84,7 +86,7 @@ export default function Index({
                 <Author author={getAuthor(author)} />
               </div>
               <div>
-                <ReadTime minutes={3} />
+                <ReadTime minutes={readingTime} />
               </div>
             </div>
           </header>

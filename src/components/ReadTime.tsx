@@ -5,10 +5,11 @@ type Props = {
 };
 
 export default function ReadTime({ minutes }: Props) {
+  const rounded = Math.round(minutes);
   return (
     <>
       <span>
-        {minutes} {minutes === 1 ? "minute" : "minutes"} read
+        {rounded} {rounded === 1 ? "minute" : "minutes"} read
       </span>
       <style jsx>{`
         span {
