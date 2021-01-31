@@ -44,6 +44,11 @@ function getRssFeedXml(posts) {
     <description>
       <![CDATA[ ${config.site_description} ]]>
     </description>
+    <image>
+      <url>${config.base_url}/feed.png</url>
+      <title><![CDATA[ ${config.site_title} ]]></title>
+      <link>${config.base_url}</link>
+    </image>
     <language>en</language>
     <lastBuildDate>${lastBuildDate.toUTCString()}</lastBuildDate>
     <atom:link href="${config.base_url}/feed.xml"
