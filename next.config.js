@@ -1,6 +1,9 @@
 module.exports = {
   pageExtensions: ["tsx"],
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    if (isServer) {
+      require("./src/scripts/feed");
+    }
     config.module.rules.push(
       ...[
         {
@@ -14,6 +17,7 @@ module.exports = {
         },
       ]
     );
+
     return config;
   },
 };

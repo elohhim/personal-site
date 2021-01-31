@@ -3,6 +3,7 @@ import Twitter from "../assets/twitter-alt.svg";
 import GitHub from "../assets/github-alt.svg";
 import Linkedin from "../assets/linkedin-alt.svg";
 import config from "../lib/config";
+import RssLink from "./RssLink";
 
 type SvgComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 
@@ -70,6 +71,7 @@ export function SocialList({ }) {
         .filter(medium => medium.account)
         .map(medium => <SocialLink key={medium.name} {...medium} />)
       }
+      <RssLink></RssLink>
     </div>
   );
 }
