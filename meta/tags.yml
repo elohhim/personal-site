@@ -1,11 +1,20 @@
 tags:
+  # types of posts
   - slug: personal
     name: personal
+  - slug: tutorial
+    name: tutorial
+  # computer science fields
   - slug: webdev
     name: webdev
-  - slug: nextjs
-    name: nextjs
   - slug: machine-learning
     name: machine-learning
   - slug: nlp
     name: nlp
+  # frameworks and libraries
+  - slug: nextjs
+    name: nextjs
+  - slug: angular
+    name: angular
+  - slug: highcharts
+    name: highcharts
