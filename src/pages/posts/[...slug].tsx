@@ -21,6 +21,7 @@ import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
 import rehypePrism from "@mapbox/rehype-prism";
 import { MdxRemote } from "next-mdx-remote/types";
+import EmbedStackblitz from "@/components/EmbedStackblitz";
 
 type Props = {
   title: string;
@@ -46,7 +47,11 @@ export default function Index({
   const keywords = tags.map((it) => getTag(it).name);
   const authorName = getAuthor(author).name;
   const datePublished = new Date(date);
-  const content = hydrate(source);
+  const content = hydrate(source, {
+    components: {
+      "EmbedStackblitz": EmbedStackblitz
+    },
+  });
   return (
     <Layout>
       <BasicMeta
@@ -110,7 +115,7 @@ export default function Index({
         {`
           .container {
             display: block;
-            max-width: 36rem;
+            max-width: 48rem;
             width: 100%;
             margin: 0 auto;
             padding: 0 1.5rem;
@@ -262,6 +267,9 @@ export default function Index({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = fetchPostContentSingle(params.slug[0]);
   const source = await renderToString(post.content, {
+    components: {
+      "EmbedStackblitz": EmbedStackblitz
+    },
     mdxOptions: {
       rehypePlugins: [rehypePrism],
     },

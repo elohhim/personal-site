@@ -3,6 +3,7 @@ const fs = require("fs");
 const matter = require("gray-matter");
 const path = require("path");
 const renderToString = require("next-mdx-remote/render-to-string");
+const React = require("react");
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
@@ -68,7 +69,17 @@ async function getPosts() {
         const fullPath = path.join(postsDirectory, fileName);
         const file = fs.readFileSync(fullPath, "utf8");
         const frontmatter = matter(file);
-        const source = await renderToString(frontmatter.content);
+        const source = await renderToString(frontmatter.content, {
+          components: {
+            EmbedStackblitz: function EmbedStackblitz({ projectId }) {
+              return React.createElement(
+                "div",
+                null,
+                `Embedded Stackblitz project: ${projectId}`
+              );
+            },
+          },
+        });
         return {
           ...frontmatter.data,
           content: source.renderedOutput,
